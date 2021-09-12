@@ -10,32 +10,32 @@
     <title>Lab 3 bài 1</title>
 </head>
 <body layout:fragment="content">
-<form th:action='@{/lab3/bai1/save}' class="shadow" method="post" th:object="${student}"
+<form th:action='@{/lab3/bai1}' class="shadow" method="post" th:object="${student}"
       style="padding: 5% 5%; margin: 20px 22%;border-radius: 5px;box-shadow: 0 10px 20px rgba(0,0,0,1)"
       enctype="multipart/form-data"
 >
     <div class="row">
         <div class="col-lg-3">
             <img width="100%" onclick="onLab3File()" th:src="@{/assets/img/logo.png}" id="lab3img">
-            <input type="file" style="display: none" onchange="setLab3Img()" id="lab3file">
+            <input type="file" style="display: none" name="lab3File" onchange="setLab3Img()" id="lab3file">
         </div>
         <div class="col-lg-9">
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Name:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="Name" required th:filed="*{name}">
+                    <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
                 </div>
             </div>
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Email:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="Email" required th:filed="*{email}">
+                    <input class="form-control" type="text" placeholder="Email" th:field="*{email}">
                 </div>
             </div>
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Marks:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="number" required min="0" max="10" placeholder="Marks" th:filed="*{marks}">
+                    <input class="form-control" type="number" placeholder="Marks" th:field="*{marks}">
                 </div>
             </div>
             <div class="row mb-2">
@@ -43,15 +43,15 @@
                 <div class="col-sm-9 pt-2">
                     <input class="form-check-input" type="radio" style="margin-right: 5px; margin-left: 10px" name="gender"
                            th:each="genderItem:${genders}"
+                           th:value="${genderItem.type}"
                            th:checked="${genderItem.type}"
-                           th:filed="*{gender}"
                            th:text="${genderItem.name}">
                 </div>
             </div>
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Faculty:</label>
                 <div class="col-sm-9">
-                    <select class="form-control" th:filed="*{faculty}">
+                    <select class="form-control" th:field="*{faculty}">
                         <option th:each="facultyItem : ${faculties}"
                                 th:value="${facultyItem.toString()}"
                                 th:text="${facultyItem.toString()}"></option>
@@ -61,15 +61,15 @@
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Hobbies:</label>
                 <div class="col-sm-9 pt-2">
-                    <input class="form-check-input" type="checkbox" style="margin-right: 5px; margin-left: 10px"
+                    <input name="hobbies" class="form-check-input" type="checkbox" style="margin-right: 5px; margin-left: 10px"
                            th:each="hobbieItem:${hobbies}"
-                           th:filed="*{hobbies}"
-                           th:text="${hobbieItem.toString()}">
+                           th:text="${hobbieItem.toString()}"
+                           th:value="${hobbieItem.toString()}">
                 </div>
             </div>
         </div>
     </div>
-    <button class="btn btn-primary">Save</button>
+    <button class="btn btn-primary" type="submit">Save</button>
 </form>
 <script>
     function onLab3File(){
@@ -80,13 +80,6 @@
         let data = await toBase64(file);
         document.getElementById('lab3img').src = data;
     }
-
-    const toBase64 = file => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
 </script>
 </body>
 </html>

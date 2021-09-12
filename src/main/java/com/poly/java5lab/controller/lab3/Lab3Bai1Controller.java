@@ -4,8 +4,10 @@ import com.poly.java5lab.entity.Genre;
 import com.poly.java5lab.entity.ProductEntity;
 import com.poly.java5lab.entity.Student;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -13,7 +15,6 @@ import java.util.*;
 public class Lab3Bai1Controller {
     @GetMapping("/lab3/bai1")
     public String bai1Page(@ModelAttribute("student") Student student) {
-        student.setName("helle");
         return "views/lab3/lab3bai1";
     }
     @ModelAttribute("genders")
@@ -39,5 +40,19 @@ public class Lab3Bai1Controller {
         return hobbies;
     }
 
+    @PostMapping("/lab3/bai1")
+    public String bai1Save(@Validated @ModelAttribute("student") Student student,
+                           BindingResult result,
+                           @RequestParam("lab3File") MultipartFile file) {
+        System.out.println(file.getSize());
+        System.out.println(student.toString());
+        if (!result.hasErrors()) {
+            System.out.println("not error");
+        } else {
+            System.out.println("error");
+            System.out.println(result.getSuppressedFields().toString());
+        }
+        return "views/lab3/lab3bai1";
+    }
 
 }
