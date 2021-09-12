@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/weblayout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2 bài 3</title>
+</head>
+<body layout:fragment="content">
+<form th:action='@{/lab2/bai3/save}' style="padding: 0 40%" method="post">
+    <div class="border-1 w-10 h-10 m-2">
+        <br/><br/>
+        <input value="" class="form-control" required placeholder="name" name="name"><br/>
+        <input value="" type="number" min="0" required class="form-control" placeholder="price" name="price"><br/>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+    <div th:if="${product != null}">
+        <h5>Kết quả:</h5>
+        <h5>name = [[${product.name}]]</h5>
+        <h5>price = [[${product.price}]]</h5>
+    </div>
+</form>
+</body>
+</html>

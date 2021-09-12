@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/weblayout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:fragment="title">Lab 2 Bài 1</title>
+</head>
+<body layout:fragment="content">
+<form action='/lab2/bai1/ok' method="post" class="text-center">
+    <div class="border-1 text-center w-100 h-100 m-2">
+        <button type="submit" class="btn btn-primary">OK 1</button>
+        <button type="submit" class="btn btn-primary" formmethod="get">OK 2</button>
+        <button type="submit" class="btn btn-primary" formaction="/lab2/bai1/okx?x=3">OK 3</button>
+    </div>
+    <h4>Kết quả: [[${ketqua}]]</h4>
+</form>
+</body>
+</html>

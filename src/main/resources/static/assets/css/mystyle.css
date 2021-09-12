@@ -1,0 +1,88 @@
+.myContainer{
+    margin: 0;
+}
+
+
+#formLeft{
+    width: 100%;
+    animation: example 1s;
+}
+
+
+
+@keyframes example {
+    0% {
+        width: 50%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+.myBtn{
+    float: right;
+    margin-left: 1%;
+}
+
+.container1{
+    width: 100%;
+}
+
+.myDropdown{
+    float: right;
+}
+.footerAddHH{
+    float: right;
+    margin: 20px 0;
+}
+.loc{
+    display: block;
+    margin: 10px;
+}
+
+#menuTab1{
+    border-bottom: 2px solid #564ab1;
+}
+.menuTab{
+    padding-bottom: 10px;
+}
+
+.headAddHH{
+    margin-bottom: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 0px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #c5427f70;
+    background-color: rgb(63, 55, 55);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    /* background: #6dd3ff;  */
+    background: linear-gradient(90deg, #564ab1 0, #564ab1 100%);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background:  #dff044; 
+  }
+
+  .locItem{
+      padding-left: 10%;
+  }
+  .dd{
+      display: block;
+  }
+  .menuTabKH, .menuTabDTGH, .menuTabNCC{
+      padding-bottom: 10px;
+  }
+  .myInputNoBorder{
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      margin-bottom: 10px;
+  }
+

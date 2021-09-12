@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title layout:fragment="title">Title</title>
+    <link rel="shortcut icon" th:href="@{assets/img/favicon.ico}">
+    <link th:href="@{/assets/css/sweetalert2.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/assets/css/icons.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/assets/css/app.min.css}" id="app-style" rel="stylesheet" type="text/css">
+    <link th:href="@{/assets/css/dataTables.bootstrap4.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/assets/css/dropzone.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/assets/css/bootstrap.min.css}" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <link th:href="@{/assets/css/mystyle.css}" rel="stylesheet" type="text/css">
+</head>
+<body data-topbar="colored" data-layout="horizontal">
+<div id="preloader">
+    <div id="status">
+        <div class="spinner"></div>
+    </div>
+</div>
+<div id="layout-wrapper">
+    <div th:replace="/component/header :: header"></div>
+    <div layout:fragment="content"></div>
+</div>
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/js/metisMenu.min.js}"></script>
+<script th:src="@{/assets/js/simplebar.min.js}"></script>
+<script th:src="@{/assets/js/waves.min.js}"></script>
+<script th:src="@{/assets/js/morris.min.js}"></script>
+<script th:src="@{/assets/js/raphael.min.js}"></script>
+<script th:src="@{/assets/js/jquery.peity.min.js}"></script>
+<script th:src="@{/assets/js/dashboard.init.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+<script th:src="@{/assets/js/myjs.js}"></script>
+
+
+<!-- Required datatable js -->
+<script th:src="@{/assets/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/js/dataTables.bootstrap4.min.js}"></script>
+<!-- Buttons examples -->
+<script th:src="@{/assets/js/dataTables.buttons.min.js}"></script>
+
+<script th:src="@{/assets/js/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/js/jszip.min.js}"></script>
+<script th:src="@{/assets/js/pdfmake.min.js}"></script>
+<script th:src="@{/assets/js/vfs_fonts.js}"></script>
+<script th:src="@{/assets/js/buttons.html5.min.js}"></script>
+<script th:src="@{/assets/js/buttons.print.min.js}"></script>
+<script th:src="@{/assets/js/buttons.colVis.min.js}"></script>
+
+<script th:src="@{/assets/js/datatables.init.js}"></script>
+
+<script th:src="@{/assets/js/dropzone.min.js}"></script>
+</body>
+</html>

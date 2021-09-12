@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/weblayout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2 Bài 5</title>
+</head>
+<body layout:fragment="content">
+    <div class="w-100 h-100 text-center" style="padding-top: 10vw">
+        <h1 th:if="${message == null && param.message == null}" class="text-center">hello</h1>
+        <h1 th:if="${message != null}" class="text-center">[[${message}]]</h1>
+        <h1 th:if="${param.message != null}" class="text-center">[[${param.message}]]</h1>
+        <a th:href="@{/b}" class="btn btn-primary">From b</a>
+        <a th:href="@{/c}" class="btn btn-primary">From c</a>
+        <a th:href="@{/d}" class="btn btn-primary">From d</a>
+    </div>
+</body>
+</html>
