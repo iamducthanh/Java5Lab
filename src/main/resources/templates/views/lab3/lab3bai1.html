@@ -70,8 +70,29 @@
         </div>
     </div>
     <button class="btn btn-primary" type="submit">Save</button>
+    <input type="hidden" id="lab3Sussess" th:if="${success != null}" value="${success}">
+    <th:block th:if="${messages != null}">
+        <input class="lab3Error" type="hidden" th:each="message:${messages}" th:value="${message.toString()}">
+    </th:block>
 </form>
 <script>
+    window.onload = function()
+    {
+        let error = document.getElementsByClassName("lab3Error");
+        let success = document.getElementById('lab3Sussess');
+        if(success != null){
+            toastSuccess("Success", "Lưu thành công!")
+        }
+        if(error != null){
+            console.log(error.length)
+            for(let i=0;i<error.length;i++){
+                console.log("erorr on")
+                toastDanger("Lỗi", error[i].value)
+            }
+        }
+    };
+
+
     function onLab3File(){
         document.getElementById("lab3file").click();
     }
