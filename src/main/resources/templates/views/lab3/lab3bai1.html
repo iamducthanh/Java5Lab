@@ -10,38 +10,42 @@
     <title>Lab 3 bài 1</title>
 </head>
 <body layout:fragment="content">
-<form th:action='@{/lab3/bai1}' class="shadow" method="post" th:object="${student}"
+<form id="lab3Form" class="shadow" method="post" th:object="${student}"
       style="padding: 5% 5%; margin: 20px 22%;border-radius: 5px;box-shadow: 0 10px 20px rgba(0,0,0,1)"
-      enctype="multipart/form-data"
+
 >
     <div class="row">
         <div class="col-lg-3">
-            <img width="100%" onclick="onLab3File()" th:src="@{/assets/img/logo.png}" id="lab3img">
+            <img width="100%" th:if="${student.image == null}" onclick="onLab3File()" th:src="@{/assets/img/logo.png}"
+                 id="lab3img">
+            <img width="100%" th:if="${student.image != null}" onclick="onLab3File()" src="@{student.image}"
+                 id="lab3img">
             <input type="file" style="display: none" name="lab3File" onchange="setLab3Img()" id="lab3file">
         </div>
         <div class="col-lg-9">
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Name:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="Name" th:field="*{name}">
+                    <input class="form-control" type="text" name="name" placeholder="Name" th:field="*{name}">
                 </div>
             </div>
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Email:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="Email" th:field="*{email}">
+                    <input class="form-control" type="text" name="email" placeholder="Email" th:field="*{email}">
                 </div>
             </div>
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Marks:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="number" placeholder="Marks" th:field="*{marks}">
+                    <input class="form-control" type="number" name="marks" placeholder="Marks" th:field="*{marks}">
                 </div>
             </div>
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Gender:</label>
                 <div class="col-sm-9 pt-2">
-                    <input class="form-check-input" type="radio" style="margin-right: 5px; margin-left: 10px" name="gender"
+                    <input class="form-check-input" type="radio" style="margin-right: 5px; margin-left: 10px"
+                           name="gender"
                            th:each="genderItem:${genders}"
                            th:value="${genderItem.type}"
                            th:checked="${genderItem.type}"
@@ -61,7 +65,8 @@
             <div class="row mb-2">
                 <label class="col-sm-3 col-form-label font-size-14">Hobbies:</label>
                 <div class="col-sm-9 pt-2">
-                    <input name="hobbies" class="form-check-input" type="checkbox" style="margin-right: 5px; margin-left: 10px"
+                    <input name="hobbies" class="form-check-input" type="checkbox"
+                           style="margin-right: 5px; margin-left: 10px"
                            th:each="hobbieItem:${hobbies}"
                            th:text="${hobbieItem.toString()}"
                            th:value="${hobbieItem.toString()}">
@@ -70,33 +75,59 @@
         </div>
     </div>
     <button class="btn btn-primary" type="submit">Save</button>
-    <input type="hidden" id="lab3Sussess" th:if="${success != null}" value="${success}">
-    <th:block th:if="${messages != null}">
-        <input class="lab3Error" type="hidden" th:each="message:${messages}" th:value="${message.toString()}">
-    </th:block>
 </form>
 <script>
-    window.onload = function()
-    {
-        let error = document.getElementsByClassName("lab3Error");
-        let success = document.getElementById('lab3Sussess');
-        if(success != null){
-            toastSuccess("Success", "Lưu thành công!")
+    let lab3Form = document.querySelector("#lab3Form");
+    lab3Form.addEventListener('submit', submitFormLab3, true)
+
+    function submitFormLab3(event) {
+        event.preventDefault();
+        let formData = $("#lab3Form").serializeArray();
+        let student = {};
+        for (let i = 0; i < formData.length; i++) {
+            student[formData[i].name] = formData[i].value;
         }
-        if(error != null){
-            console.log(error.length)
-            for(let i=0;i<error.length;i++){
-                console.log("erorr on")
-                toastDanger("Lỗi", error[i].value)
-            }
-        }
-    };
+        $.ajax({
+            url: '/lab3/bai1',
+            data: formData,
+            error: function () {
+                console.log("error")
+            },
+            success: async function (data) {
+                if(data.length != 0){
+                    for (let i = 0; i < data.length; i++) {
+                        toastDanger("Lỗi", data[i]);
+                    }
+                } else {
+                    toastSuccess("Success", "Lưu thành công!")
+                }
+            },
+            type: 'POST'
+        });
+    }
+
+    // window.onload = function()
+    // {
+    //     let error = document.getElementsByClassName("lab3Error");
+    //     let success = document.getElementById('lab3Sussess');
+    //     if(success != null){
+    //         toastSuccess("Success", "Lưu thành công!")
+    //     }
+    //     if(error != null){
+    //         console.log(error.length)
+    //         for(let i=0;i<error.length;i++){
+    //             console.log("erorr on")
+    //             toastDanger("Lỗi", error[i].value)
+    //         }
+    //     }
+    // };
 
 
-    function onLab3File(){
+    function onLab3File() {
         document.getElementById("lab3file").click();
     }
-    async function setLab3Img(){
+
+    async function setLab3Img() {
         const file = document.getElementById("lab3file").files[0];
         let data = await toBase64(file);
         document.getElementById('lab3img').src = data;

@@ -26,4 +26,5 @@ public class Student {
     String faculty;
     @NotEmpty(message = "NotEmpty.student.hobbies")
     List<String> hobbies;
+    String image;
 }
