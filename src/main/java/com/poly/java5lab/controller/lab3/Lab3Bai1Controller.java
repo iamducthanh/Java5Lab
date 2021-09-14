@@ -54,8 +54,7 @@ public class Lab3Bai1Controller {
     @PostMapping("/lab3/bai1")
     @ResponseBody
     public List<String> bai1Save(@Validated @ModelAttribute("student") Student student,
-                           BindingResult result,
-                           Model model
+                           BindingResult result
                           ) {
         System.out.println(student.toString());
         List<String> errorMessages = new ArrayList<>();
@@ -82,8 +81,6 @@ public class Lab3Bai1Controller {
                 System.out.println(message.getString(objectError.getDefaultMessage()));
             }
             Collections.reverse(errorMessages);
-
-//            model.addAttribute("messages", errorMessages);
         }
         return errorMessages;
     }

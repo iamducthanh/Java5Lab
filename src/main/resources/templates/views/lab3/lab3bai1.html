@@ -77,8 +77,7 @@
     <button class="btn btn-primary" type="submit">Save</button>
 </form>
 <script>
-    let lab3Form = document.querySelector("#lab3Form");
-    lab3Form.addEventListener('submit', submitFormLab3, true)
+    document.querySelector("#lab3Form").addEventListener('submit', submitFormLab3, true)
 
     function submitFormLab3(event) {
         event.preventDefault();
