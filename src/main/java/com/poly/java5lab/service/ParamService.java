@@ -7,8 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
+import javax.xml.bind.DatatypeConverter;
+import java.io.*;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,7 +20,7 @@ public class ParamService {
     private HttpServletRequest request;
 
     @Autowired
-    private ServletContext application;
+    private ServletContext servletContext;
 
     public String getString(String name, String defaultValue) {
         String value = request.getParameter(name);
@@ -65,7 +67,7 @@ public class ParamService {
     public File save(MultipartFile multipartFile, String path) {
         try {
             if (!multipartFile.isEmpty()) {
-                String pathApp = application.getRealPath("/");
+                String pathApp = servletContext.getRealPath("/");
                 File file = new File(pathApp + path + "/" + multipartFile.getOriginalFilename());
                 multipartFile.transferTo(Path.of(file.getAbsolutePath()));
                 return file;
@@ -94,7 +96,7 @@ public class ParamService {
                 break;
         }
         byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-        String pathApp = application.getRealPath("/");
+        String pathApp = servletContext.getRealPath("/");
         File file = new File(pathApp + path + "/" + name + "." + extension);
         try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             outputStream.write(data);
@@ -104,18 +106,5 @@ public class ParamService {
         return file;
     }
 
-    @Autowired
-    private HttpSession session;
 
-    public <T> T get(String name){
-        return (T) session.getAttribute(name);
-    }
-
-    public void set(String name, Object value){
-        session.setAttribute(name, value);
-    }
-
-    public void remove(String name){
-        session.removeAttribute(name);
-    }
 }

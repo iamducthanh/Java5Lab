@@ -35,22 +35,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/signin", "/signup", "/lock_acount", "/testImage").permitAll();
+//        http.authorizeRequests().antMatchers("/signin", "/signup", "/lock_acount", "/testImage").permitAll();
 
-        http.authorizeRequests().antMatchers("/*").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/lab4/bai2").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
-        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+//        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
 
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
         http.authorizeRequests().and().formLogin()
-                .loginProcessingUrl("/j_spring_security_check")
-                .loginPage("/signin")
-                .defaultSuccessUrl("/")
-                .failureUrl("/signin?status=login_false")
+
+                .loginProcessingUrl("/checklogin")
+                .loginPage("/lab4/login")
+                .defaultSuccessUrl("/lab4/bai2")
+                .failureUrl("/lab4/login?status=login_false")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .and().logout().logoutUrl("/signout").logoutSuccessUrl("/trang-chu");
+                .and().logout().logoutUrl("/signout").logoutSuccessUrl("/home");
 
         http.authorizeRequests().and() //
                 .rememberMe().tokenRepository(this.persistentTokenRepository())
