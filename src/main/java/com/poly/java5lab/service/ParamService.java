@@ -24,7 +24,7 @@ public class ParamService {
 
     public String getString(String name, String defaultValue) {
         String value = request.getParameter(name);
-        if (value.isBlank()) {
+        if (value.isEmpty()) {
             return defaultValue;
         }
         return value;
@@ -32,7 +32,7 @@ public class ParamService {
 
     public int getInt(String name, Integer defaultValue) {
         String value = request.getParameter(name);
-        if (value.isBlank()) {
+        if (value.isEmpty()) {
             return defaultValue;
         }
         return Integer.valueOf(value);
@@ -40,7 +40,7 @@ public class ParamService {
 
     public double getDouble(String name, Double defaultValue) {
         String value = request.getParameter(name);
-        if (value.isBlank()) {
+        if (value.isEmpty()) {
             return defaultValue;
         }
         return Double.valueOf(value);
@@ -56,7 +56,7 @@ public class ParamService {
 
     public Date getDate(String name, String pattern) throws ParseException {
         String date = request.getParameter(name);
-        if (!date.isBlank()) {
+        if (!date.isEmpty()) {
             SimpleDateFormat sdf = new SimpleDateFormat(pattern);
             Date value = sdf.parse(date);
             return value;
