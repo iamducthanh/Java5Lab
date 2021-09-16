@@ -64,19 +64,19 @@ public class ParamService {
         return null;
     }
 
-    public File save(MultipartFile multipartFile, String path) {
-        try {
-            if (!multipartFile.isEmpty()) {
-                String pathApp = servletContext.getRealPath("/");
-                File file = new File(pathApp + path + "/" + multipartFile.getOriginalFilename());
-                multipartFile.transferTo(Path.of(file.getAbsolutePath()));
-                return file;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    public File save(MultipartFile multipartFile, String path) {
+//        try {
+//            if (!multipartFile.isEmpty()) {
+//                String pathApp = servletContext.getRealPath("/");
+//                File file = new File(pathApp + path + "/" + multipartFile.getOriginalFilename());
+//                multipartFile.transferTo(Path.of(file.getAbsolutePath()));
+//                return file;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     public File save(String dataBase64, String path, String name) {
         String[] strings = dataBase64.split(",");
